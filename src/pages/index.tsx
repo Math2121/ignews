@@ -1,10 +1,9 @@
 import style from "./home.module.scss";
-
 import Head from "next/head";
 import { SubscribeButton } from "../components/SubscribeButton";
 import { GetStaticProps } from "next";
 import { stripe } from "../services/stripe";
-import { getSession } from "next-auth/client";
+
 
 interface HomeProps {
   product: {
