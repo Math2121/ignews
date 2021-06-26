@@ -10,41 +10,41 @@ export default NextAuth({
       scope: "read:user",
     }),
   ],
-  jwt: {
-    signingKey: process.env.SIGNING_KEY,
-  },
-  callbacks: {
-    async signIn(user, account, profile) {
-      const { email } = user;
+  // jwt: {
+  //   signingKey: process.env.SIGNING_KEY,
+  // },
+  // callbacks: {
+  //   async signIn(user, account, profile) {
+  //     const { email } = user;
 
-      try {
-        //VErifica se existe um usuário com determinado e-mail no banco
-        await fauna.query(
-          query.If(
-            query.Not(
-              query.Exists(
-                query.Match(
-                  query.Index("user_by_email"),
-                  query.Casefold(email)
-                )
-              )
-            ),//else
-            query.Create(
-              query.Collection("users"), 
-              { data: { email } }
-            ),
-            query.Get(
-              query.Match(
-                query.Index("user_by_email"),
-                query.Casefold(email)
-              )
-            )
-          )
-        );
-        return true;
-      } catch (error) {
-        return false;
-      }
-    },
-  },
+  //     try {
+  //       //VErifica se existe um usuário com determinado e-mail no banco
+  //       await fauna.query(
+  //         query.If(
+  //           query.Not(
+  //             query.Exists(
+  //               query.Match(
+  //                 query.Index("user_by_email"),
+  //                 query.Casefold(email)
+  //               )
+  //             )
+  //           ),//else
+  //           query.Create(
+  //             query.Collection("users"), 
+  //             { data: { email } }
+  //           ),
+  //           query.Get(
+  //             query.Match(
+  //               query.Index("user_by_email"),
+  //               query.Casefold(email)
+  //             )
+  //           )
+  //         )
+  //       );
+  //       return true;
+  //     } catch (error) {
+  //       return false;
+  //     }
+  //   },
+  // },
 });
