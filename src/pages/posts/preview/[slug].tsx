@@ -6,7 +6,7 @@ import styles from "../post.module.scss";
 import { getPrismicClient } from "../../../services/prismic";
 import { useEffect } from "react";
 import { useSession } from "next-auth/client";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 interface PropsPost {
   post: {
     slug: string;
